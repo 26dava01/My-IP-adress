@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My IP</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            margin: 0;
+        }
+        .container {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        pre {
+            font-size: 22px;
+            font-weight: bold;
+            padding: 10px;
+            background: #333;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .loading {
+            color: #7c7474;
+        }
+    </style>
+    <script>
+        async function fetchIP() {
+            try {
+                let response = await fetch('https://api64.ipify.org?format=json');
+                let data = await response.json();
+                document.getElementById('ip-display').textContent = data.ip;
+            } catch (error) {
+                document.getElementById('ip-display').textContent = 'Could not get the IP address.';
+                console.error('Error fetching IP:', error);
+            }
+        }
+        window.onload = fetchIP;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Your IP-adress</h1>
+        <pre id="ip-display" class="loading">Laster IP...</pre>
+    </div>
+</body>
+</html>
